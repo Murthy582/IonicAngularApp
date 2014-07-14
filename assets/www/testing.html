@@ -1,0 +1,20 @@
+<html ng-app="IonicAngularApp">
+    <head>    
+        <title>TestApp</title>
+        <script src="angular.min.js"></script>
+	    <script src="app.js"></script>
+    </head>
+    <body >
+        <section ng-controller="TabController as bdyctrl">
+            <button ng-click="bdyctrl.selectTab(1)">1</button>
+            <button ng-click="bdyctrl.selectTab(2)">2</button>
+            <button ng-click="bdyctrl.selectTab(3)">3</button>
+            <button ng-click="bdyctrl.selectTab(4)">4</button>
+            <div ng-show="bdyctrl.tab === 1">You Clicked on 1</div>
+            <div ng-show="bdyctrl.tab === 2">You Clicked on 2</div>
+            <div ng-show="bdyctrl.tab === 3">You Clicked on 3</div>
+            <div ng-show="bdyctrl.tab === 4">You Clicked on 4</div>
+        </section>
+        
+</body> 
+</html>

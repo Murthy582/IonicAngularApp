@@ -1,0 +1,25 @@
+<br/>
+<br/>
+<form name="RequestForm" ng-controller="FormController as fCtrl">
+    <div class="list list-inset">
+        <label class="item item-input" >
+            <input type="number" placeholder="Number 1" ng-model="fCtrl.a" required />
+        </label>
+        <label class="item item-input" >
+            <input type="number" placeholder="Number 2" ng-model="fCtrl.b" required />
+        </label>
+        <label class="item item-input item-select">
+            <div class="input-label">
+                Operator
+            </div>
+            <select id="dropdown">
+                <option selected>+</option>
+                <option>-</option>
+                <option>*</option>
+                <option>/</option>
+            </select>
+        </label>
+        <br/>
+                 <button class = "button button-positive" ng-click="fCtrl.add()">Calculate</button>
+        </div>
+</form>
