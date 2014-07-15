@@ -1,50 +1,60 @@
 var app = angular.module('SkunkAndroidApp.Controllers',[]);
 
-app.controller('SideMenuController', function($scope, $ionicSideMenuDelegate,$state ){
+app.service('Data',function(){
+
+    var accountList = [];
+    var currentAccount ='Test1';
+    var bookmarkAccount = function(accountName){
+        accountList.push(accountName);
+    }
+    var setPassingAccount = function(Account)
+    {
+        console.log('in Service : setting current account value to '+Account);
+        currentAccount = Account;
+    }
+    /*var getAccountList = function(){
+        if(typeof AccountList != "undefined" && AccountList != null && AccountList.length > 0){
+            return accountList;
+        }
+    }*/
+    return{
+        bookmarkAccount: bookmarkAccount,
+        setPassingAccount: setPassingAccount,
+        currentAccount: function() {
+            return currentAccount;
+        },
+        accountList: accountList
+    };
+});
+
+
+
+app.controller('SideMenuController', function($scope, $ionicSideMenuDelegate,$state,Data ){
     this.tab = 1;
-    this.account = '';
+    
     $scope.toggleLeft = function () {
         $ionicSideMenuDelegate.toggleLeft();
     };
     this.selectTab = function(setTab){
     this.tab = setTab;
     }
-    this.getCurrentAccount = function(Data){
-        this.account = Data.getAccountName();
-        return this.account;
-    }
+    $scope.Data = Data;
+    
+    
+    $scope.account = Data.currentAccount();
+    console.log('in smCtrl : account value from service '+ $scope.account);
+    //$scope.Data = Data;
 });
 
-app.factory('Data',function(){
 
-    var name = '';
-    var setAccountName = function(accountName)
-    {
-        this.name = accountName;
-    }
-    var getAccountName = function()
-    {
-        return this.name;
-    }
-
-})
-/*app.controller('TabController', function($state){
-this.tab = 1;
-    this.selectTab = function(setTab){
-    this.tab = setTab;
-    }
-    this.changeState = function(){
-    $state.transitionTo('AccountHome');
-    };
-}); */
 
 app.controller('BookmarkController',function($ionicPopup,Data){
 
      this.accountList = [];
-    this.accountName = '';
+    this.accountList = Data.accountList;
     this.addAccount = function(){
         if(this.Account != '' && this.Account != null){
-            this.accountList.push(this.Account);
+            Data.bookmarkAccount(this.Account);
         }
         else
         {
@@ -57,10 +67,9 @@ app.controller('BookmarkController',function($ionicPopup,Data){
         }
         this.Account = '';
     };
-    this.setCurrentAccount = function(account)
-    {
-        Data.setAccountName(account);
-        //this.accountName = account;
+    this.setCurrentAccount = function(account){
+        console.log('In bmCtrl :received current account name '+ account);
+        Data.setPassingAccount(account);
     }
     
 });

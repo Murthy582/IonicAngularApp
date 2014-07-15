@@ -9,7 +9,7 @@ app.config(['$urlRouterProvider','$stateProvider', function($urlRouterProvider,$
     })
     .state('AccountDetail',{
         url : '/AccountDetail',
-        templateUrl : 'AccountDetail.html',
+        templateUrl : 'AccountDetail.html'
         
     })
 }])
