@@ -40,7 +40,7 @@
           <section>
           <div ng-show="smCtrl.tab === 1"><p ng-include="'sales-request.html'"></p></div>
           <div ng-show="smCtrl.tab === 2"><p ng-include="'Opportunity.html'"></p></div>
-          <div ng-show="smCtrl.tab === 3"><p ng-include="'News.html'"></p></div>
+          <div ng-show="smCtrl.tab === 3" ng-controller="FeedCtrl" ng-click="feedSrc='http://feeds2.feedburner.com/Mashable';loadFeed()"><p ng-include="'News.html'"></p></div>
           </section>
       </ion-side-menu-content>
   </ion-side-menus>

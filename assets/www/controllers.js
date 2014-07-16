@@ -1,34 +1,5 @@
 var app = angular.module('SkunkAndroidApp.Controllers',[]);
 
-app.service('Data',function(){
-
-    var accountList = [];
-    var currentAccount ='Test1';
-    var bookmarkAccount = function(accountName){
-        accountList.push(accountName);
-    }
-    var setPassingAccount = function(Account)
-    {
-        console.log('in Service : setting current account value to '+Account);
-        currentAccount = Account;
-    }
-    /*var getAccountList = function(){
-        if(typeof AccountList != "undefined" && AccountList != null && AccountList.length > 0){
-            return accountList;
-        }
-    }*/
-    return{
-        bookmarkAccount: bookmarkAccount,
-        setPassingAccount: setPassingAccount,
-        currentAccount: function() {
-            return currentAccount;
-        },
-        accountList: accountList
-    };
-});
-
-
-
 app.controller('SideMenuController', function($scope, $ionicSideMenuDelegate,$state,Data ){
     this.tab = 1;
     
@@ -46,13 +17,34 @@ app.controller('SideMenuController', function($scope, $ionicSideMenuDelegate,$st
     //$scope.Data = Data;
 });
 
-
+app.controller("FeedCtrl", ['$scope','FeedService', function ($scope,Feed) {    
+    $scope.loadButonText="Load";
+    console.log('in Feed controller');
+    $scope.loadFeed=function(){        
+        Feed.parseFeed($scope.feedSrc).then(function(res){
+            //$scope.loadButonText=angular.element(e.target).text();
+            $scope.feeds=res.data.responseData.feed.entries;
+            console.log('setting feeds value');
+        });
+    }
+}]);
 
 app.controller('BookmarkController',function($ionicPopup,Data){
 
      this.accountList = [];
     this.accountList = Data.accountList;
     this.addAccount = function(){
+        if(this.accountList.indexOf(this.Account) != -1){
+            $ionicPopup.alert({
+            
+                title : 'Error !',
+                template : 'Account already exists in your Favourite List!'
+                
+            });
+            this.Account='';
+            return;
+        }
+  
         if(this.Account != '' && this.Account != null){
             Data.bookmarkAccount(this.Account);
         }
