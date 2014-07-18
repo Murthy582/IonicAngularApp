@@ -1,14 +1,12 @@
 var app = angular.module('SkunkAndroidApp.Controllers',[]);
 
 app.controller('SideMenuController', function($scope, $ionicSideMenuDelegate,$state,Data ){
-    this.tab = 1;
+    
     
     $scope.toggleLeft = function () {
         $ionicSideMenuDelegate.toggleLeft();
     };
-    this.selectTab = function(setTab){
-    this.tab = setTab;
-    }
+    
     $scope.Data = Data;
     
     
@@ -19,12 +17,17 @@ app.controller('SideMenuController', function($scope, $ionicSideMenuDelegate,$st
 
 app.controller("FeedCtrl", ['$scope','FeedService', function ($scope,Feed) {    
     $scope.loadButonText="Load";
+    $scope.feedLenght = 0;
+    $scope.feedSrc="http://feeds2.feedburner.com/Mashable";
     console.log('in Feed controller');
     $scope.loadFeed=function(){        
         Feed.parseFeed($scope.feedSrc).then(function(res){
             //$scope.loadButonText=angular.element(e.target).text();
             $scope.feeds=res.data.responseData.feed.entries;
-            console.log('setting feeds value');
+            $scope.feedLength = $scope.feeds.length;
+            
+            console.log('setting feeds value, no of feeds :'+$scope.feeds.length);
+            
         });
     }
 }]);

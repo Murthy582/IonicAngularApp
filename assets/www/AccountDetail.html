@@ -1,5 +1,5 @@
 <div ng-controller="SideMenuController as smCtrl">
-  <ion-side-menus ><!--ng-controller="TabController as tabCtrl"-->
+  <ion-side-menus ng-controller="FeedCtrl"><!--ng-controller="TabController as tabCtrl"-->
       <!-- actual side menu -->
       
       
@@ -11,14 +11,16 @@
           </ion-header-bar>
           <ion-content>
             <ion-list>
-                <ion-item ng-click="smCtrl.selectTab(1)">SalesRequest</ion-item>
+                <ion-item ui-sref="AccountDetail.News" ng-click="loadFeed()">News</ion-item>
             </ion-list>
             <ion-list>
-                <ion-item ng-click="smCtrl.selectTab(2)">Opportunities</ion-item>
+                <!--ion-item ng-click="smCtrl.selectTab(1)">SalesRequest</ion-item-->
+                <ion-item ui-sref="AccountDetail.SalesRequest">SalesRequest</ion-item>
             </ion-list>
             <ion-list>
-                <ion-item ng-click="smCtrl.selectTab(3)">News</ion-item>
+                <ion-item ui-sref="AccountDetail.Opportunities">Opportunities</ion-item>
             </ion-list>
+            
         </ion-content>
       </ion-side-menu>
       
@@ -38,9 +40,10 @@
               </div>
           </ion-header-bar>
           <section>
-          <div ng-show="smCtrl.tab === 1"><p ng-include="'sales-request.html'"></p></div>
+              <div ui-view></div>
+          <!--div ng-show="smCtrl.tab === 1"><p ng-include="'sales-request.html'"></p></div>
           <div ng-show="smCtrl.tab === 2"><p ng-include="'Opportunity.html'"></p></div>
-          <div ng-show="smCtrl.tab === 3" ng-controller="FeedCtrl" ng-click="feedSrc='http://feeds2.feedburner.com/Mashable';loadFeed()"><p ng-include="'News.html'"></p></div>
+          <div ng-show="smCtrl.tab === 3" ng-controller="FeedCtrl" ng-click="feedSrc='http://feeds2.feedburner.com/Mashable';loadFeed()"><p ng-include="'News.html'"></p></div-->
           </section>
       </ion-side-menu-content>
   </ion-side-menus>

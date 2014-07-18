@@ -4,23 +4,35 @@ app.config(['$urlRouterProvider','$stateProvider', function($urlRouterProvider,$
     //$urlRouterProvider.otherwise('/');
     $stateProvider
     .state('AccountHome',{
+        
         url : '/AccountHome',
         templateUrl : 'AccountHome.html'
     })
     .state('AccountDetail',{
+        
         url : '/AccountDetail',
         templateUrl : 'AccountDetail.html'
-        
     })
-    .state('News',{
+    .state('AccountDetail.News',{
         url : '/News',
         templateUrl : 'News.html'
     })
+    .state('AccountDetail.Opportunities',{
+        
+        url : '/Opportunity',
+        templateUrl : 'Opportunity.html'                              
+    })
+    .state('AccountDetail.SalesRequest',{
+        
+        url : '/SalesRequest',
+        templateUrl : 'sales-request.html'        
+    })
 }])
 
-app.run(['$state', function($state){
+app.run(['$state','$rootScope', function($state,$rootScope){
 
     $state.transitionTo('AccountHome');
+    $rootScope.newsFeed = [];
    // $state.transitionTo('News');
 
 }]);

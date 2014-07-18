@@ -1,37 +1,19 @@
 <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
 <br/><br/><br/>
-<div class="container-fluid" ng-controller="FeedCtrl">
+<div class="container-fluid" style="overflow-y: scroll;">
     <div>
         <div class="row-fluid">
             <h4>Feed Reader using AngularJS</h4>
             <form>
-                <!--div class="input-prepend span12">
-              <div class="btn-group">
-                <button class="btn btn-info" type="button" tabindex="-1">{{loadButonText}}</button>
-                <button class="btn btn-info dropdown-toggle" data-toggle="dropdown" tabindex="-1">
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a href="#" ng-click="feedSrc='http://rss.cnn.com/rss/cnn_topstories.rss';loadFeed($event);">CNN</a></li>
-                  <li><a href="#" ng-click="feedSrc='http://online.wsj.com/xml/rss/3_7014.xml';loadFeed($event)">Hacker News</a></li>
-                  <li><a href="#" ng-click="feedSrc='http://feeds2.feedburner.com/Mashable';loadFeed($event)">Mashable</a></li>                  
-                  <li><a href="#" ng-click="feedSrc='http://feeds.huffingtonpost.com/huffingtonpost/raw_feed';loadFeed($event)">Huffington Post</a></li>
-                  <li><a href="#" ng-click="feedSrc='http://online.wsj.com/xml/rss/3_7014.xml';loadFeed($event)">TechCrunch</a></li>
-                    <li><a href="#" ng-click="feedSrc='http://online.wsj.com/xml/rss/3_7014.xml';loadFeed($event)">WSJ Business</a></li>
-                </ul>
-              </div>
-                    <input type="text" class="span10" autocomplete="off" placeholder="Enter Feed URL" data-ng-model="feedSrc" />
-            </div -->
-            <label class="item-input-wrapper">
-                <i class="icon ion-ios7-search placeholder-icon"></i>
-                <input type="search" placeholder="Search News..." ng-model="filterText">
-            </label>
-               
+                <label class="item-input-wrapper">
+                    <i class="icon ion-ios7-search placeholder-icon"></i>
+                    <input type="search" placeholder="Search News..." ng-model="filterText">
+                </label>
             </form>
         </div>
-        <div class="row-fluid"  >
+        <div class="row-fluid">
             <ul class="unstyled" style="overflow-y: scroll;">
-                <!--span class="badge badge-warning" ng-show="feeds.length > 0">{{(feeds | filter:filterText).length}} Items</span-->
+                <span class="badge badge-warning" ng-show="feeds.length > 0">{{(feeds | filter:filterText).length}} Items</span>
                 <li ng-repeat="feed in feeds | filter:filterText">                    
                     <h5><a href="{{feed.link}}" target="_blank">{{feed.title}}</a></h5>                                        
                     <p class="text-left">{{feed.contentSnippet}}</p>                    
