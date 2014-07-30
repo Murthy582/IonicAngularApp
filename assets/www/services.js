@@ -27,10 +27,19 @@ app.service('Data',function(){
     };
 });
 
-app.factory('FeedService',['$http',function($http){
+app.factory('FeedService',['$http','$q',function($http,$q){
     return {
             parseFeed : function(url){
-            return $http.jsonp('http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url));
+                var deferred = $q.defer();
+                if($http.jsonp('http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url)))
+                {
+                    deferred.resolve($http.jsonp('http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url)))
+                }
+                else
+                {
+                    deferred.reject('Error processing URL');
+                }
+            return deferred.promise;
             }
         }
     }]);

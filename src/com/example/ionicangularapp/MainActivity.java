@@ -3,6 +3,7 @@ package com.example.ionicangularapp;
 import android.os.Bundle;
 import android.view.Menu;
 import org.apache.cordova.DroidGap;
+import android.R;
 
 public class MainActivity extends DroidGap {
 

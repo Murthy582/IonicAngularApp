@@ -15,13 +15,15 @@ app.controller('SideMenuController', function($scope, $ionicSideMenuDelegate,$st
     //$scope.Data = Data;
 });
 
-app.controller("FeedCtrl", ['$scope','FeedService', function ($scope,Feed) {    
+app.controller("FeedCtrl", ['$scope','FeedService', function ($scope,FeedService) {    
     $scope.loadButonText="Load";
     $scope.feedLenght = 0;
     $scope.feedSrc="http://feeds2.feedburner.com/Mashable";
     console.log('in Feed controller');
-    $scope.loadFeed=function(){        
-        Feed.parseFeed($scope.feedSrc).then(function(res){
+    $scope.loadFeed=function(){
+        console.log('in FeedCtrl : inside loadFeed method');
+        FeedService.parseFeed($scope.feedSrc).then(function(res){
+            console.log('in FeedCtrl: calling parseFeed service method');
             //$scope.loadButonText=angular.element(e.target).text();
             $scope.feeds=res.data.responseData.feed.entries;
             $scope.feedLength = $scope.feeds.length;
